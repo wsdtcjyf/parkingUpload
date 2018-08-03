@@ -47,10 +47,13 @@ public class TransferUtils {
 		
 		for (String as : alarms) {
 			for (int i = 0; i < 28; i++) {
-				if(null != strList.get(i) && null != as){
-					if((strList.get(i)).contains(as)){
-						ait[7-i/4] = (byte) (ait[7-i/4] | (1 << (i%4 == 0 ? i/4 : i%4)) );
+				if(null != as){
+					if(!as.equals("定位")) {
+						if((strList.get(i)).contains(as)){
+							ait[7-i/4] = (byte) (ait[7-i/4] | (1 << i%4));
+						}
 					}
+					
 				}
 			}
 		}
@@ -64,23 +67,23 @@ public class TransferUtils {
 	 */
 	public static byte[] transerState2Bit(String[] state){
 		byte[] bits = new byte[8];
-		int res = 0;
+		/*int res = 0;
 		for (String str : state) {
 			if(str.equals("未定位")){
-				res = 1 | 0;
+				res = 1 << 0;
 				bits[7] = (byte) (bits[7] | res);
 			}else if(str.equals("非营运")){
-				res = res | (1 << 3);
-				bits[7] = (byte) res;
+				res = 1 << 3;
+				bits[7] = (byte) (bits[7] | res);
 			}else if(str.equals("ACC开")){
 				res = 1 << 0;
 				bits[5] = (byte) (bits[5] | res) ;
 			}else if(str.equals("重车")){
-				res = res | ( 1 << 1 );
+				res = 1 << 1 ;
 				bits[5] = (byte) (bits[5] |res) ;
 			}
-		}
-	/*	List<String> strList = new ArrayList<String>();
+		}*/
+		List<String> strList = new ArrayList<String>();
 		strList.add("未卫星定位");
 		strList.add("南纬");
 		strList.add("西经");
@@ -98,19 +101,15 @@ public class TransferUtils {
 		strList.add("已达到限制营运次数/时间");
 		for (String st : state) {
 			for (int i = 0; i < 15; i++) {
-				if(null != strList.get(i) && null != st){
-					if(!strList.get(i).equals("定位")){
-						System.out.println("进入定位");
-						break;
-					}
-					if((strList.get(i)).contains(st)){
-						System.out.println("strList.get(i)) :"+strList.get(i));
-						bits[7-i/4] = (byte) (1 << (i%4 == 0 ? i/4 : i%4) | bits[7-i/4]);
+				if(null != st){
+					if(!st.equals("定位")){
+						if((strList.get(i)).contains(st)){
+							bits[7-i/4] = (byte) ((1 << i%4) | bits[7-i/4]);
+						}
 					}
 				}
 			}
 		}
-		System.out.println(bits[5]);*/
 		return bits;
 	}
 	

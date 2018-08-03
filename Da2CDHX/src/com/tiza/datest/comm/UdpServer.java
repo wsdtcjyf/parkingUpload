@@ -123,7 +123,7 @@ public class UdpServer extends Thread {
 						break;
 					}
 					str2[i] = TransferUtils.TransferStr(carfir[i]);
-				}
+			 	}
 				
 				//得到state中文数组state[]
 				if(null == carfir[3]){
@@ -186,51 +186,42 @@ public class UdpServer extends Thread {
 		}
 	}
 	
-	/*public static void main(String[] args) {
+	public static void main(String[] args) {
 		
 		//tqjOuw==,1tiztQ==,1MvTqg==,tefV2Q==,ts/TzQ==,t8e3qLXju/A=,wrzS9LnK1c8=,vMa828b30tHL+A==,U0S/qNLss6M=,we+ztbGovq8=,srm0qw==
 
-		String[] carfir = new String[]{"tqjOuw==","1tiztQ==","1MvTqg==","tefV2Q=","ts/TzQ=","t8e3qLXju/A","wrzS9LnK1c8","Ma828b30tHL+A","U0S/qNLss6M","we+ztbGovq8=","srm0qw"};
-		String[] str2 = new String[4]; 
-		String[] state = new String[4]; 
-		for (int i = 0; i < 4; i++ ) {
-			if(null == carfir[3]){
-				break;
+		/*String[] carfir = new String[]{"tqjOuw==","1tiztQ==","1MvTqg==","tefV2Q==","ts/TzQ==","t8e3qLXju/A==","wrzS9LnK1c8==","Ma828b30tHL+A==","U0S/qNLss6M==","we+ztbGovq8==","srm0qw=="};
+		String[] str2 = new String[carfir.length]; 
+			for (int i = 0; i < carfir.length; i++ ) {
+				str2[i] = TransferUtils.TransferStr(carfir[i]);
+				System.out.println(str2[i]);
 			}
-			str2[i] = TransferUtils.TransferStr(carfir[i]);
-			System.out.println(str2[i]);
-		}
+			
+			
+			//创建接收alarm中文数组
+			String[] alas = new String[carfir.length];
+			for(int i = 0; i < carfir.length; i++){
+				alas[i] = TransferUtils
+						.TransferStr(carfir[i]);
+			}
+			
+			//得到alarm的bit数组
+			byte[] alastr = TransferUtils.trslarm2Bit(alas);
+			//得到state的bit数组
+			byte[] stastr = TransferUtils.transerState2Bit(str2);
+			//得到state的int值
+			Integer stateInt = Integer.parseInt(
+					TransferUtils.toHex2(stastr).toString(),16); 
+			Integer alarmInt = Integer.parseInt(
+					TransferUtils.toHex2(alastr).toString(),16);
+			System.out.println("stateHex16 ---:"+TransferUtils.toHex2(stastr).toString());
+			System.out.println("alarmHex16 ---:"+TransferUtils.toHex2(alastr).toString());
+			System.out.println("stateInt ---:"+stateInt+"-----"+"alarmInt ---:"+alarmInt);
+			System.out.println((char)(18+'a'));
+			System.out.println(1%4);*/
 		
-		//得到state中文数组state[]
-		if(null == carfir[3]){
-			System.arraycopy(str2, 0, state, 0, 3);
-		}else{
-			System.arraycopy(str2, 0, state, 0, 4);
-		}
-		//创建接收alarm中文数组
-//		String[] alas = new String[carfir.length-state.length];
-		
-		String[] alas = new String[carfir.length-4];
-		System.out.println("alas.length :"+alas.length);
-		for(int i = 4; i < carfir.length; i++){
-			alas[i-4] = TransferUtils
-					.TransferStr(carfir[i]);
-		}
-		//得到alarm的bit数组
-		byte[] alastr = TransferUtils.trslarm2Bit(alas);
-		//得到state的bit数组
-		byte[] stastr = TransferUtils.transerState2Bit(state);
-		//得到state的int值
-		Integer stateInt = Integer.parseInt(
-				TransferUtils.toHex2(stastr).toString(),16); 
-		Integer alarmInt = Integer.parseInt(
-				TransferUtils.toHex2(alastr).toString(),16);
-		System.out.println(TransferUtils
-					.TransferStr("t8e3qLXju/A"));
-		System.out.println("stateHex16 ---:"+TransferUtils.toHex2(stastr).toString());
-		System.out.println("alarmHex16 ---:"+TransferUtils.toHex2(alastr).toString());
-		System.out.println("stateInt ---:"+stateInt+"-----"+"alarmInt ---:"+alarmInt);
-	}*/
+			
+	}
 	
 	
 	/**
